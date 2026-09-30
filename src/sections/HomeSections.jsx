@@ -9,6 +9,11 @@ import { Reveal, SectionHead, Icon, Gauge } from '../components/ui'
 import ProductCard from '../components/ProductCard'
 import { useQuote } from '../context/QuoteContext'
 
+/** Mobile-only cue that a row scrolls sideways. */
+export function SwipeHint() {
+  return <div className="swipe-hint" aria-hidden="true">Swipe to explore <ArrowRight size={14} /></div>
+}
+
 /* ---------------- About preview ---------------- */
 export function AboutPreview() {
   const ref = useRef(null)
@@ -71,11 +76,12 @@ export function ProductShowcase({ limit = 6 }) {
             ))}
           </div>
         </SectionHead>
-        <motion.div layout className="product-grid">
+        <motion.div layout className="product-grid m-scroll">
           <AnimatePresence mode="popLayout">
             {list.map((p, i) => <ProductCard key={p.slug} p={p} index={i} />)}
           </AnimatePresence>
         </motion.div>
+        <SwipeHint />
         <Reveal style={{ textAlign: 'center', marginTop: 50 }}>
           <Link to="/products" className="btn btn-outline">View full catalogue <ArrowRight size={18} /></Link>
         </Reveal>
@@ -153,7 +159,7 @@ export function ServicesGrid({ withHead = true }) {
             <Link to="/services" className="btn btn-ghost">All services <ArrowRight size={18} /></Link>
           </SectionHead>
         )}
-        <div className="services-grid">
+        <div className="services-grid m-scroll">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={(i % 3) * 0.08} className="service-card">
               {s.photo && <img className="service-photo" src={s.photo} alt="" loading="lazy" />}
@@ -164,6 +170,7 @@ export function ServicesGrid({ withHead = true }) {
             </Reveal>
           ))}
         </div>
+        <SwipeHint />
       </div>
     </section>
   )
@@ -225,7 +232,7 @@ export function WhyUs() {
       <div className="container why-grid">
         <div>
           <SectionHead eyebrow="Why NMT" title="The partner that" highlight="doesn't fail under pressure" />
-          <div className="why-cards">
+          <div className="why-cards m-scroll">
             {whyUs.map((w, i) => (
               <Reveal key={w.title} delay={(i % 2) * 0.08} className="why-card">
                 <Icon name={w.icon} size={32} />
@@ -234,6 +241,7 @@ export function WhyUs() {
               </Reveal>
             ))}
           </div>
+          <SwipeHint />
         </div>
         <Reveal className="why-visual" x={40} y={0}>
           <img src="/images/stock/welding-sparks.webp" alt="Welding in the fabrication shop" loading="lazy" />

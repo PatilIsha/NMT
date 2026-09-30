@@ -91,7 +91,7 @@ export default function ProductDetail() {
         <section className="section section-grey">
           <div className="container">
             <SectionHead eyebrow="Related" title="You may also" highlight="need" />
-            <div className="product-grid">
+            <div className="product-grid m-scroll">
               {related.map((r, i) => <ProductCard key={r.slug} p={r} index={i} />)}
             </div>
           </div>
